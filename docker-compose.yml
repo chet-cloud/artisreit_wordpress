@@ -12,10 +12,14 @@ services:
   wordpress:
     image: artisreit/artisreit_wordpress:latest
     ports:
-      - '80:8080'
+      - '80:8181'
       - '443:8443'
     volumes:
       - 'wordpress_data:/bitnami/wordpress'
+      - '/home/bear/fronts/artisreit_wordpress/conf:/opt/bitnami/nginx/conf'
+      - '/home/bear/fronts/artisreit_wordpress/nginx-cache:/var/run/nginx-cache'
+      - '/home/bear/fronts/artisreit_wordpress/log:/var/log/'
+      - '/home/bear/fronts/artisreit_wordpress/www:/var/www/'
     depends_on:
       - mariadb
     environment:
