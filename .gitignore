@@ -1,4 +1,4 @@
 .idea
-nginx-cache/*
-www/*
-log/*
+.nginx-cache/*
+.www/*
+.log/*
