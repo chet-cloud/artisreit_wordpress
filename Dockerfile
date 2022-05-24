@@ -1,9 +1,10 @@
-FROM bitnami/nginx:1.21.5-debian-10-r23 AS builder
+FROM bitnami/nginx:1.21-debian-10 AS builder
 USER root
 ## Redeclare NGINX_VERSION so it can be used as a parameter inside this build stage
 ENV NGINX_VERSION=1.21.5
 ## Install required packages and build dependencies
-RUN install_packages dirmngr gpg gpg-agent curl build-essential libpcre3-dev zlib1g-dev libperl-dev
+RUN install_packages dirmngr gpg gpg-agent curl build-essential zlib1g-dev libperl-dev
+## perl libperl-dev libgd3 libgd-dev libgeoip1 libgeoip-dev geoip-bin libxml2 libxml2-dev libxslt1.1 libxslt1-dev
 ## Add trusted NGINX PGP key for tarball integrity verification
 RUN gpg --keyserver pgp.mit.edu --recv-key 520A9993A1C052F8
 ## Download NGINX, verify integrity and extract
@@ -26,7 +27,7 @@ RUN cd /tmp/nginx-${NGINX_VERSION} && \
 
 ###############################################################
 
-FROM bitnami/wordpress-nginx:5.8.3-debian-10-r12
+FROM bitnami/wordpress-nginx:5.9.3
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 
 ## Change user to perform privileged actions
