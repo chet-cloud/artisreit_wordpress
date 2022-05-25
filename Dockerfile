@@ -1,17 +1,17 @@
 FROM bitnami/nginx:1.21-debian-10 AS builder
 USER root
 ## Redeclare NGINX_VERSION so it can be used as a parameter inside this build stage
-ENV NGINX_VERSION=1.21.5
+ENV NGINX_VERSION=1.21.6
 ## Install required packages and build dependencies
-RUN install_packages dirmngr gpg gpg-agent curl build-essential zlib1g-dev libperl-dev
+RUN install_packages dirmngr gpg gpg-agent curl build-essential libpcre3-dev zlib1g-dev libperl-dev
 ## perl libperl-dev libgd3 libgd-dev libgeoip1 libgeoip-dev geoip-bin libxml2 libxml2-dev libxslt1.1 libxslt1-dev
 ## Add trusted NGINX PGP key for tarball integrity verification
-RUN gpg --keyserver pgp.mit.edu --recv-key 520A9993A1C052F8
+# RUN gpg --keyserver pgp.mit.edu --recv-key 520A9993A1C052F8
 ## Download NGINX, verify integrity and extract
 RUN cd /tmp && \
     curl -O http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
     curl -O http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz.asc && \
-    gpg --verify nginx-${NGINX_VERSION}.tar.gz.asc nginx-${NGINX_VERSION}.tar.gz && \
+    # gpg --verify nginx-${NGINX_VERSION}.tar.gz.asc nginx-${NGINX_VERSION}.tar.gz && \
     tar xzf nginx-${NGINX_VERSION}.tar.gz
 
 RUN cd /tmp && \
