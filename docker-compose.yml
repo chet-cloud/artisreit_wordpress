@@ -2,6 +2,8 @@ version: '2'
 services:
   mariadb:
     image: docker.io/bitnami/mariadb:10.3
+    ports:
+      - '3306:3306'
     volumes:
       - ./site/db:/bitnami/mariadb
     environment:
@@ -15,7 +17,7 @@ services:
       - '80:8181'
       - '443:8443'
     volumes:
-      # - '/home/bear/projects/artisreit_wordpress/site/wwwroot/wordpress:/bitnami/wordpress'
+      - '/home/bear/projects/artisreit_wordpress/site/wwwroot/wordpress:/bitnami/wordpress'
       - '/home/bear/projects/artisreit_wordpress/site/conf:/opt/bitnami/nginx/conf'
       - '/home/bear/projects/artisreit_wordpress/site/nginx-cache:/var/run/nginx-cache'
       - '/home/bear/projects/artisreit_wordpress/site/log:/var/log/'
